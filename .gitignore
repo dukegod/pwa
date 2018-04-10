@@ -8,6 +8,9 @@
 
 # production
 
+.vscode/
+
+.idea/
 
 # misc
 .DS_Store

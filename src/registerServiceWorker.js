@@ -31,9 +31,9 @@ export default function register() {
 
     window.addEventListener('load', () => {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
-      console.log(swUrl)
 
       if (isLocalhost) {
+        console.log('localhost')
         // This is running on localhost. Lets check if a service worker still exists or not.
         checkValidServiceWorker(swUrl);
 
@@ -47,6 +47,7 @@ export default function register() {
         });
       } else {
         // Is not local host. Just register service worker
+        console.log('not---localhost')
         registerValidSW(swUrl);
       }
     });
@@ -71,6 +72,7 @@ function registerValidSW(swUrl) {
               // At this point, everything has been precached.
               // It's the perfect time to display a
               // "Content is cached for offline use." message.
+              window.alert('offline 333')
               console.log('Content is cached for offline use.');
             }
           }

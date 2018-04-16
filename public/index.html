@@ -10,6 +10,14 @@
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <!-- 添加主屏幕按钮 -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <!-- 配置主屏幕按钮 -->
+    <link rel="icon" sizes="192x192" href="%PUBLIC_URL%/images/icons/hello-world-pwa-icon-180.png"> 
+    <link rel="apple-touch-icon" sizes="192x192" href="%PUBLIC_URL%/images/icons/hello-world-pwa-icon-180.png">
+    <!-- 设置状态栏目 -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <meta name="apple-mobile-web-app-title" content="Pwa Lite">
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -19,7 +27,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>PWA-title</title>
   </head>
   <body>
     <noscript>

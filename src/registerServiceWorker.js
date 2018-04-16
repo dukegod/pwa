@@ -103,6 +103,7 @@ function checkValidServiceWorker(swUrl) {
       }
     })
     .catch(() => {
+      window.alert('offline')
       console.log(
         'No internet connection found. App is running in offline mode.'
       );

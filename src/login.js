@@ -1,46 +1,49 @@
-
-import axios  from 'axios';
-const V3_URL = 'https://github.com/login/oauth/authorize?client_id=1c72eade967e3396cae4';
-
-let token = localStorage.getItem('pwaToken');
+import { Buffer } from 'buffer';
 
 
+const getBasicAuth = ({
+  username,
+  password,
+}) => {
+  const authBuffer = Buffer.from(`${username}:${password}`);
+  return `Basic ${authBuffer.toString('base64')}`;
+};
 
-const login = async(code) => {
-  return axios('https://github.com/login/oauth/access_token', {
-    method: 'get',
+const fetchDate = async(number) => {
+  const payload = JSON.stringify({
+    client_secret:'014a481cade513c92feb1ec88eaea83c6c0d29a2',
+    scopes: [
+    'user',
+    'repo',
+    'delete_repo',
+    'notifications',
+    'gist',
+    'admin:repo_hook',
+    'admin:org_hook',
+    'admin:org',
+    'admin:public_key',
+    'admin:gpg_key',
+    ],
+    note: `PWA`,
+  });
+  let response;
+  response = await fetch('https://api.github.com/authorizations/clients/1', {
+    method: 'PUT',
     headers: {
-      'Accept': 'application/json, text/plain, */*',
-      'content-type': 'application/json'
+      Authorization: getBasicAuth({
+        name: 'dukegod',
+        password: 'ahxx123456',
+      }),
     },
-    // credentials: 'same-origin',
-    // mode: 'no-cors',
-    data: JSON.stringify({
-      code: code,
-      client_id: '1c72eade967e3396cae4',
-      client_secret: '014a481cade513c92feb1ec88eaea83c6c0d29a2',
-    })
+    body: payload,
   })
-}
-// login()
-
-
-const oauth = async() => {
-  // 获取code
-  if (!token) {
-    window.location.href = 'https://github.com/login/oauth/authorize?client_id=1c72eade967e3396cae4&redirect_uri=http://localhost:3000/';
-    window.localStorage.setItem('pwaToken', 9)
-  }
-
-  const code = window.location.search.substring(1).split('=')[1];
-  if (code) {
-    console.log(code);
-    login(code)
-    // window.location.href = `https://github.com/login/oauth/access_token?code=${code}&client_id=1c72eade967e3396cae4&client_secret=014a481cade513c92feb1ec88eaea83c6c0d29a2&redirect_uri=http://localhost:3000/`;
-    // return await {
-    //   code: code
-    // }
-  }
+  let body;
+  body = await response.json();
+  return {
+    status: response.status,
+    ok: response.ok,
+    body: body.data,
+  };
 }
 
-oauth()
+fetchDate(2)

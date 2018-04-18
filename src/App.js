@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import axios  from 'axios';
 import logo from './logo.svg';
 import './App.css';
 import api from './api'
-// import login from './login'
+import login from './login'
+import LoginPage from './loginPage';
 
 
 class NumberList extends Component {
@@ -29,12 +31,12 @@ class App extends Component {
 
 
   componentDidMount() {
-    api(50).then(re => {
-      console.log(re)
-      this.setState({
-        numbers: re.body.search.edges
-      })
-    })
+    // api(50).then(re => {
+    //   console.log(re)
+    //   this.setState({
+    //     numbers: re.body.search.edges
+    //   })
+    // })
   }
 
 
@@ -49,6 +51,7 @@ class App extends Component {
         <p className="App-intro">
           Github 上有关pwa的项目
         </p>
+        <LoginPage />
         <ul>
           {
             this.state.numbers.map((item, index) => <NumberList key={index} id={index} item= {item}/>)

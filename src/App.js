@@ -1,79 +1,47 @@
 import React, { Component } from 'react';
-// import axios  from 'axios';
-import logo from './logo.svg';
-import './App.css';
-import api from './api'
-// import login from './login'
-import LoginPage from './loginPage';
-
-
-class NumberList extends Component {
-  render() {
-    const { item, id } = this.props 
-    return(
-      <li key= {id}>
-        <a href={`https://github.com/${item.node.name}`}>{parseInt(id, 10)+1}----{item.node.name}</a>
-        <p>作者： { item.node.owner.login }</p>
-      </li>
-    )
-  }
-}
-
+import routers from './routes'
+import './statics/App.css'
+import './store/store-token';
 
 class App extends Component {
-  
-  constructor(props) {
-    super()
+
+  constructor() {
+    super();
     this.state = {
-      numbers: []
+      route: window.location.hash.substr(1) || '#/'
     }
   }
-
 
   componentDidMount() {
-
-    if (localStorage.getItem('pwaToken')) {
-      api(50).then(re => {
-        console.log(re)
-        if (re && re.body && re.body.search && re.body.search.edges) {
-          this.setState({
-            numbers: re.body.search.edges
-          })
-        }
-
+    console.log(routers);
+    window.addEventListener('hashchange', () => {
+      this.setState({
+        route: window.location.hash.substr(1)
       })
-    }
-
-
+    })
   }
 
-
-
+  
   render() {
-
-    if (!localStorage.getItem('pwaToken')) {
-      return (<LoginPage />)
-    } else {
-      return (
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">PWA</h1>
-          </header>
-          <p className="App-intro">
-            Github 上有关pwa的项目
-          </p>
-
-          <ul>
-            {
-              this.state.numbers.map((item, index) => <NumberList key={index} id={index} item= {item}/>)
-            }
-          </ul>
-        </div>
-      );
+    let ChildRoute;
+    console.log(this.state)
+    switch (this.state.route) {
+      case '/about':
+        ChildRoute = routers.aboutPage
+        break;
+      case '/login':
+        ChildRoute = routers.loginPage
+        break;
+      case '/pwa':
+        ChildRoute = routers.PwaPage
+        break;        
+      default:
+        ChildRoute = routers.homePage
+        break;
     }
-
-
+    return(
+        <ChildRoute />
+    )
   }
 }
 

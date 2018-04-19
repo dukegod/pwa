@@ -1,3 +1,41 @@
+.home-class{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+  height: 100%;  
+}
+.home-class header {
+  flex: auto 1 1;
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+.home-class p {
+  flex: auto 1 1;
+  color: #000000;
+  font-size: 18px;
+}
+.home-class div {
+  flex: auto 1 1;
+  /* background-color: beige; */
+}
+
+.login {
+  margin: 150px auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  color: #222;
+  font-size: 18px;
+}
+.login span {
+  font-size: 16px;
+}
+
+
 .App {
   text-align: center;
 }

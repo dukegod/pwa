@@ -1,5 +1,5 @@
 import { Buffer } from 'buffer';
-
+import Oauth from '../singleOauth';
 
 const getBasicAuth = ({
   username,
@@ -10,19 +10,22 @@ const getBasicAuth = ({
   return `Basic ${authBuffer.toString('base64')}`;
 };
 
-const fetchDate = async(username, password) => {
+const LoginOauth = async(username, password) => {
   const payload = JSON.stringify({
-    client_secret:'014a481cade513c92feb1ec88eaea83c6c0d29a2',
+    client_secret: Oauth.client_secret,
+    client_id: Oauth.client_id,
     scopes: [
     'user',
     'repo',
     ],
     note: `PWA`,
-    fingerprint: 'heroapp'
+    // fingerprint: 'heroapp'
   });
   let response;
-  response = await fetch('https://api.github.com/authorizations/clients/1c72eade967e3396cae4', {
-    method: 'PUT',
+  response = await fetch('https://api.github.com/authorizations', {
+  // response = await fetch('https://api.github.com/authorizations/clients/1c72eade967e3396cae4', {
+    // method: 'PUT',
+    method: 'POST',
     headers: {
       Authorization: getBasicAuth({
         username,
@@ -33,8 +36,7 @@ const fetchDate = async(username, password) => {
   })
   let body;
   body = await response.json();
-  console.log(body)
-  localStorage.setItem('pwaToken', body.token)
+
   return {
     status: response.status,
     ok: response.ok,
@@ -42,4 +44,4 @@ const fetchDate = async(username, password) => {
   };
 }
 
-export default fetchDate;
+export default LoginOauth;

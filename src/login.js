@@ -5,45 +5,41 @@ const getBasicAuth = ({
   username,
   password,
 }) => {
+  console.log(username, password)
   const authBuffer = Buffer.from(`${username}:${password}`);
   return `Basic ${authBuffer.toString('base64')}`;
 };
 
-const fetchDate = async(number) => {
+const fetchDate = async(username, password) => {
   const payload = JSON.stringify({
     client_secret:'014a481cade513c92feb1ec88eaea83c6c0d29a2',
     scopes: [
     'user',
     'repo',
-    'delete_repo',
-    'notifications',
-    'gist',
-    'admin:repo_hook',
-    'admin:org_hook',
-    'admin:org',
-    'admin:public_key',
-    'admin:gpg_key',
     ],
     note: `PWA`,
+    fingerprint: '1c72eade967e3396cae4'
   });
   let response;
-  response = await fetch('https://api.github.com/authorizations/clients/1', {
+  response = await fetch('https://api.github.com/authorizations/clients/1c72eade967e3396cae4', {
     method: 'PUT',
     headers: {
       Authorization: getBasicAuth({
-        name: 'dukegod',
-        password: 'ahxx123456',
+        username,
+        password,
       }),
     },
     body: payload,
   })
   let body;
   body = await response.json();
+  console.log(body)
+  localStorage.setItem('pwaToken', body.token)
   return {
     status: response.status,
     ok: response.ok,
-    body: body.data,
+    body: body,
   };
 }
 
-fetchDate(2)
+export default fetchDate;

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import axios  from 'axios';
+// import axios  from 'axios';
 import logo from './logo.svg';
 import './App.css';
 import api from './api'
-import login from './login'
+// import login from './login'
 import LoginPage from './loginPage';
 
 
@@ -31,34 +31,41 @@ class App extends Component {
 
 
   componentDidMount() {
-    // api(50).then(re => {
-    //   console.log(re)
-    //   this.setState({
-    //     numbers: re.body.search.edges
-    //   })
-    // })
+    api(50).then(re => {
+      console.log(re)
+      this.setState({
+        numbers: re.body.search.edges
+      })
+    })
   }
 
 
 
   render() {
-    return ( 
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">PWA</h1>
-        </header>
-        <p className="App-intro">
-          Github 上有关pwa的项目
-        </p>
-        <LoginPage />
-        <ul>
-          {
-            this.state.numbers.map((item, index) => <NumberList key={index} id={index} item= {item}/>)
-          }
-        </ul>
-      </div>
-    );
+
+    if (!localStorage.getItem('pwaToken')) {
+      return (<LoginPage />)
+    } else {
+      return (
+        <div className="App">
+          <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <h1 className="App-title">PWA</h1>
+          </header>
+          <p className="App-intro">
+            Github 上有关pwa的项目
+          </p>
+
+          <ul>
+            {
+              this.state.numbers.map((item, index) => <NumberList key={index} id={index} item= {item}/>)
+            }
+          </ul>
+        </div>
+      );
+    }
+
+
   }
 }
 

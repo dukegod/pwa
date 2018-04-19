@@ -1,16 +1,6 @@
-import { Buffer } from 'buffer';
 
 const GRAPHQL_URL = 'https://api.github.com/graphql';
-const accessToken = '';
-
-
-const getBasicAuth = ({
-  username,
-  password,
-}) => {
-  const authBuffer = Buffer.from(`${username}:${password}`);
-  return `Basic ${authBuffer.toString('base64')}`;
-};
+const accessToken = localStorage.getItem('pwaToken');
 
 const queryReps = (number)=> `
   query {
@@ -31,10 +21,6 @@ const queryReps = (number)=> `
   }
 `
 
-
-
-
-
 const fetchDate = async(number) => {
   const payload = JSON.stringify({
     query: queryReps(number),
@@ -43,10 +29,7 @@ const fetchDate = async(number) => {
   response = await fetch(GRAPHQL_URL, {
     method: 'POST',
     headers: {
-      Authorization: getBasicAuth({
-        name: 'dukegod',
-        password: 'ahxx123456',
-      }),
+      Authorization: `token ${accessToken}`
     },
     body: payload,
   })

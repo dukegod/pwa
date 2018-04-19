@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import fetchDate from './login'
 
 class Login extends Component {
   constructor() {
     super();
     this.state = {
-      name: '',
-      password: ''
+      name: 'dukegod',
+      password: 'ahxx123456'
     }
   }
 
@@ -15,21 +16,29 @@ class Login extends Component {
     const name = target.name;
 
     this.setState({
-      name: value
+      [name]: value
     });
+  }
+
+  handSubmit() {
+    console.log(this.state)
+    fetchDate(this.state.name, this.state.password)
+      .then((re) => {
+        console.log(re)
+      })
   }
 
   render() {
     return (
       <div>
         <label>
-          <input placeholder="name" type="text" value={ this.state.name } onChange={this.handleInputChange} />
+          <input placeholder="name" type="text" name="name" value={ this.state.name } onChange={ this.handleInputChange.bind(this)} />
         </label>
         <hr />  
         <label>
-          <input placeholder="ps" type="text" value={ this.state.password } onChange={this.handleInputChange} />
+          <input placeholder="password" type="text" name="password" value={ this.state.password } onChange={ this.handleInputChange.bind(this) } />
         </label>  
-        <p onClick={this.handSubmit}></p>
+        <p onClick={ this.handSubmit.bind(this) }> 提交信息 </p>
       </div>
     )
   }

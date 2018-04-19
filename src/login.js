@@ -18,7 +18,7 @@ const fetchDate = async(username, password) => {
     'repo',
     ],
     note: `PWA`,
-    fingerprint: '1c72eade967e3396cae4'
+    fingerprint: 'heroapp'
   });
   let response;
   response = await fetch('https://api.github.com/authorizations/clients/1c72eade967e3396cae4', {

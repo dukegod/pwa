@@ -31,12 +31,20 @@ class App extends Component {
 
 
   componentDidMount() {
-    api(50).then(re => {
-      console.log(re)
-      this.setState({
-        numbers: re.body.search.edges
+
+    if (localStorage.getItem('pwaToken')) {
+      api(50).then(re => {
+        console.log(re)
+        if (re && re.body && re.body.search && re.body.search.edges) {
+          this.setState({
+            numbers: re.body.search.edges
+          })
+        }
+
       })
-    })
+    }
+
+
   }
 
 

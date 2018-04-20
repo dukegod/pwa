@@ -1,3 +1,4 @@
+// 查询repository
 
 const GRAPHQL_URL = 'https://api.github.com/graphql';
 const accessToken = localStorage.getItem('pwaToken');

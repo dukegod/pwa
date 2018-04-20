@@ -25,5 +25,3 @@ if (localStorage.getItem('pwaToken')) {
 
 export default PWATOKEN;
 
-
-// export { setToken, getToken};

@@ -1,6 +1,6 @@
 // 首页
 import React from 'react';
-import LoginOauth from '../store/login'
+import LoginOauth from '../apis/login'
 
 class HomePage extends React.Component {
   constructor() {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import routers from './routes'
 import './statics/App.css'
-import './store/store-token';
+import './utils/store-token';
 
 class App extends Component {
 
@@ -13,7 +13,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log(routers);
+    // console.log(routers);
     window.addEventListener('hashchange', () => {
       this.setState({
         route: window.location.hash.substr(1)
@@ -24,7 +24,7 @@ class App extends Component {
   
   render() {
     let ChildRoute;
-    console.log(this.state)
+    // console.log(this.state)
     switch (this.state.route) {
       case '/about':
         ChildRoute = routers.aboutPage

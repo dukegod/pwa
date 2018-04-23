@@ -1,5 +1,5 @@
 import React from 'react';
-import fetchDate from '../store/api';
+import queryRep from '../apis/query-rep';
 
 class NumberList extends React.Component {
   render() {
@@ -24,16 +24,14 @@ class PwaComponent extends React.Component {
   }
 
   componentDidMount() {
-    if (localStorage.getItem('pwaToken')) {
-      fetchDate(50).then(re => {
-        console.log(re);
-        if (re && re.body && re.body.search && re.body.search.edges) {
-          this.setState({
-            numbers: re.body.search.edges
-          });
-        }
-      });
-    }
+    queryRep(50).then(re => {
+      console.log(re);
+      if (re && re.data.search.edges) {
+        this.setState({
+          numbers: re.data.search.edges
+        });
+      }
+    });
   }
 
   render() {

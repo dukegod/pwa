@@ -1,8 +1,13 @@
+/**
+ * by liuhui
+ * 2018年04月23日10:17:52
+ * 引入base64处理登录信息
+ */
+
 import { Buffer } from 'buffer';
 import Oauth from '../settings';
 
 const getBasicAuth = ({ username, password }) => {
-  // console.log(username, password);
   const authBuffer = Buffer.from(`${username}:${password}`);
   return `Basic ${authBuffer.toString('base64')}`;
 };
@@ -27,10 +32,9 @@ const LoginOauth = async (username, password) => {
   });
   let body;
   body = await response.json();
-
   return {
-    status: response.status,
-    ok: response.ok,
+    code: response.status,
+    message: 'success',
     body: body
   };
 };

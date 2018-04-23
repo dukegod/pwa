@@ -6,15 +6,15 @@ class HomePage extends React.Component {
     return (
       <section className="home-class">
         <header>
-          PWA
+          
         </header>
         <p>
-          Github pwa 实践 
+          Github 
         </p>
         <div>
-          <a href="#/about"> about </a>
+          <a href="#/about"> 关于自己 </a>
           <hr />
-          <a href="#/pwa"> pwa </a>
+          <a href="#/pwa"> Github上搜索pwa相关的项目 </a>
           <hr />
         </div>
       </section>

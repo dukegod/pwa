@@ -1,7 +1,6 @@
 // 查询repository
 
-const GRAPHQL_URL = 'https://api.github.com/graphql';
-const accessToken = localStorage.getItem('pwaToken');
+import fetchAsync from '../utils/fetch';
 
 const queryReps = (number)=> `
   query {
@@ -22,26 +21,16 @@ const queryReps = (number)=> `
   }
 `
 
-const fetchDate = async(number) => {
-  const payload = JSON.stringify({
-    query: queryReps(number),
-  })
-  let response;
-  response = await fetch(GRAPHQL_URL, {
+const queryRep = async(number) => {
+  
+  return await fetchAsync({
     method: 'POST',
-    headers: {
-      Authorization: `token ${accessToken}`
-    },
-    body: payload,
+    body: {
+      query: queryReps(number)
+    }
   })
-  let body;
-  body = await response.json();
-  return {
-    status: response.status,
-    ok: response.ok,
-    body: body.data,
-  };
+  
 }
 
 
-export default fetchDate;
+export default queryRep;
